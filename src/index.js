@@ -1,16 +1,19 @@
 import React,{Suspense} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './pages/mainpage';
+import './css/index.css';
+import App from './App.js';
 import {FirebaseAppProvider} from 'reactfire';
 import firebaseConfig from './firebase-config';
+import {BrowserRouter as Router} from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
 
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <Suspense fallback={'Cargando gatitos con estetoscopio..'}>
-        <App/>
+        <Router>
+        <App/>          
+        </Router>
       </Suspense>
     </FirebaseAppProvider>
     

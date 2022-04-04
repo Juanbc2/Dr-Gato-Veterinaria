@@ -27,7 +27,7 @@ export default (props)=>{
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          // ...
+          console.log(user.email);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -40,13 +40,12 @@ return(
         <div>
             <label htmlFor="email">Correo electrónico: </label>
             <input type='email' id='email' onChange={(e) => setEmail(e.target.value)}/>
+            <br/>
             <label htmlFor="password">Contraseña: </label>
             <input type='password' id='password'  onChange={(e) => setPassword(e.target.value)}/>
+            <br/>
             <button onClick={Registro}>Registrar</button>
-            <button onClick={Ingreso}>Ingresar</button>            
-
-
-
+            <button onClick={Ingreso}>Ingresar</button> 
         </div>
     </div>
 )
