@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import {  Route,Routes,Link } from "react-router-dom";
+import {  Route,Routes,Link,Navigate } from "react-router-dom";
 import logo from './resources/images/topImageAux.png';
 import './css/normalize.css';
 import './css/stylesheet.css';
@@ -12,6 +12,9 @@ import { Modal } from 'react-responsive-modal';
 import Auth from './services/auth';
 import auth from "./services/auth";
 import { getAuth } from "firebase/auth";
+import NotFound from "./pages/404";
+
+
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -20,6 +23,7 @@ class App extends React.Component {
             open: false,
             login: false,
             loginMessage: 'Iniciar sesión',
+            usuario: ''
         }
         this.openModal = this.openModal.bind(this);
         this.onOpenModal = this.onOpenModal.bind(this);
@@ -52,10 +56,10 @@ class App extends React.Component {
         const user = auth.currentUser;
         if(user){
             this.setState({
-            login: true,loginMessage: 'Cerrar sesión'
+            login: true,loginMessage: 'Cerrar sesión', usuario: user.email+' '
         });}else{
            this.setState({
-            login: false,loginMessage: 'Iniciar sesión'
+            login: false,loginMessage: 'Iniciar sesión', usuario: ''
         }); 
         }
       }
@@ -66,7 +70,7 @@ class App extends React.Component {
       <div className="body">
         <header>
             <Link to="/" >
-                <img src={logo}></img>
+                <img src={logo} alt='logo' draggable='false'></img>
             </Link>
             <h1>Dr Gato Veterinaria</h1>
             
@@ -77,6 +81,7 @@ class App extends React.Component {
                 <Link to='/productos'>Productos</Link>
                 <Link to='/consultorio'>Consultorio</Link>
                 <Link to="/about">Nosotros</Link>
+                <h6>{this.state.usuario}</h6>
                 <button className='boton sombra' onClick={this.onOpenModal}>{this.state.loginMessage}</button> 
             </nav>
         </div>
@@ -85,10 +90,16 @@ class App extends React.Component {
       </Modal>
         <Suspense fallback="Cargando productos...">
        <Routes>
-       <Route path='/' element={<Home/>} />
-       <Route path='/productos' element={<Productos/>} />
-       <Route path='/consultorio' element={<Consultorio/>} />
-       <Route path='/about' element={<AboutUs/>} />
+       <Route exact path='/' element={<Home/>} />
+       <Route exact path='/productos' element={<Productos/>} />
+       <Route exact path='/consultorio' element={<Consultorio/>} />
+       <Route exact path='/about' element={<AboutUs/>} />
+       <Route exact path='/404' element={<NotFound/>}/>
+       <Route
+        path="/*"
+        element={<Navigate to="/404" replace />}
+    />
+       
        </Routes>
        </Suspense>
         <footer>
