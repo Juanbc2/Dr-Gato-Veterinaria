@@ -13,6 +13,7 @@ import Auth from './services/auth';
 import auth from "./services/auth";
 import { getAuth } from "firebase/auth";
 import NotFound from "./pages/404";
+import SweetAlert from "sweetalert";
 
 
 class App extends React.Component {
@@ -23,7 +24,8 @@ class App extends React.Component {
             open: false,
             login: false,
             loginMessage: 'Iniciar sesión',
-            usuario: ''
+            usuario: '',
+            auth: getAuth(),
         }
         this.openModal = this.openModal.bind(this);
         this.onOpenModal = this.onOpenModal.bind(this);
@@ -36,10 +38,9 @@ class App extends React.Component {
         });
       }
 
-      onOpenModal = async()  => {
+      onOpenModal = ()  => {
         if(this.state.login==true){
-            const auth = getAuth();
-            await auth.signOut();
+            this.state.auth.signOut();
             this.checkIfLoggedIn();
         }else{
             this.setState({ open: true });
@@ -51,19 +52,22 @@ class App extends React.Component {
         this.checkIfLoggedIn();
       };
 
-      checkIfLoggedIn =()=> {
-        const auth = getAuth();
-        const user = auth.currentUser;
+      checkIfLoggedIn = () => {
+        const user = this.state.auth.currentUser;
         if(user){
             this.setState({
             login: true,loginMessage: 'Cerrar sesión', usuario: user.email+' '
-        });}else{
+        });
+      }else{
            this.setState({
             login: false,loginMessage: 'Iniciar sesión', usuario: ''
         }); 
         }
       }
 
+  componentDidMount(){
+    this.checkIfLoggedIn();
+  }
 
   render(){
   return (
@@ -85,10 +89,11 @@ class App extends React.Component {
                 <button className='boton sombra' onClick={this.onOpenModal}>{this.state.loginMessage}</button> 
             </nav>
         </div>
-      <Modal open={this.state.open} onClose={this.onCloseModal} center>
-        <Auth />
+<Modal open={this.state.open} onClose={this.onCloseModal} center>
+        <Auth/>
       </Modal>
-        <Suspense fallback="Cargando productos...">
+       
+
        <Routes>
        <Route exact path='/' element={<Home/>} />
        <Route exact path='/productos' element={<Productos/>} />
@@ -96,12 +101,8 @@ class App extends React.Component {
        <Route exact path='/about' element={<AboutUs/>} />
        <Route exact path='/404' element={<NotFound/>}/>
        <Route
-        path="/*"
-        element={<Navigate to="/404" replace />}
-    />
-       
+        path="/*" element={<Navigate to="/404" replace />}/>
        </Routes>
-       </Suspense>
         <footer>
             <h2>Dr Gato Veterinaria</h2>
         </footer>

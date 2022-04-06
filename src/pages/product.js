@@ -9,8 +9,16 @@ const db = getFirestore(app);
 
 
 
-export default function App() {
+export default function App(props) {
   const [productos, setProductos] = useState([{ name: "Loading...", id: "initial" }]);
+  const onAdd = (prod) =>{
+    console.log(prod.name);
+
+    //no sé hacer que este producto "prod" se mande a shop.onAdd()
+    //
+
+
+  };
 
   useEffect(
     () =>
@@ -26,7 +34,7 @@ export default function App() {
     <div className='imageFrame'><img src={`${producto.image}`} alt='foto del producto'></img></div>
     <h2>{producto.name}</h2>
     <h3>$ {producto.prize}</h3>
-    <button className='boton sombra'>Añadir al carrito</button>
+    <button className='boton sombra' onClick={()=>onAdd(producto)}>Añadir al carrito</button>
 </div>
       ))
       }
@@ -35,16 +43,3 @@ export default function App() {
 }
 
 
-/*
-  async function getProductos(db){
-  //useEffect({});
-  const productosCol = collection(db, 'productos');
-  const productosSnapshot =await getDocs(productosCol);
-  const productosList = productosSnapshot.docs.map((doc) => doc.data());
-  //console.log(`data ${JSON.stringify(productosList)}`);
-  console.log(productosList);
-  return productosList;
-}
-
-export const productosList = getProductos(db);
-*/

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import 'firebase/auth';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { getAuth,sendPasswordResetEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
 import '../css/stylesheet.css';
+import { act } from "react-dom/test-utils";
+import SweetAlert from 'sweetalert';
 
 export default (props)=>{
     const [email,setEmail] = useState('');
@@ -15,7 +17,11 @@ export default (props)=>{
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            window.alert("Registrado con éxito");
+            SweetAlert({
+                title: "Registrado con éxito",
+                text: "Cuenta registrada, ahora puedes iniciar",
+                icon: "sucess",
+              });
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -26,39 +32,64 @@ export default (props)=>{
     }
 
     const Ingreso = () => {
-        setPersistence(auth,browserLocalPersistence).then(() =>{
+
          signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          window.alert("Ingreso exitoso");
+        .then(() => {
+            SweetAlert({
+                title: "Inicio de sesión",
+                text: "Sesión iniciada",
+                icon: "sucess",
+              });
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
-          if(errorCode === "auth/wrong-password"){window.alert("Usuario y/o contraseña incorrecta.")};
+          console.log(errorCode);
         });
-    });
+    
+    }
+
+    const Reestablecer = () => {
+
+        var actionCodeSettings = {
+            url: 'https://dr-gato-veterinaria.web.app/?email=user@example.com',
+            iOS: {
+              bundleId: 'com.example.ios'
+            },
+            android: {
+              packageName: 'com.example.android',
+              installApp: true,
+              minimumVersion: '12'
+            },
+            handleCodeInApp: true
+          };
+        sendPasswordResetEmail(auth,email,actionCodeSettings).then(() => {
+            window.alert("Correo de recuperación enviado con éxito.");
+        }).catch((error) =>{
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode);
+            if(errorCode === "auth/invalid-email"){window.alert("Correo inválido, verifique.")};
+            if(errorCode === "auth/user-not-found"){window.alert("El correo no se encuentra registrado.")};
+        })
     }
     
 return(
-    <div >
-        <center className='login'>
+    <div>
+        <center className="login">
             <h3>Iniciar sesión</h3>
-            <table>
-                <tr>
-                    <td>Usuario:</td>
-                    <td><input type='email' id='email' onChange={(e) => setEmail(e.target.value)}/></td>
-                </tr>
-                <tr>
-                <td>Contraseña:</td>
-                    <td><input type='password' id='password'  onChange={(e) => setPassword(e.target.value)}/></td>
-                </tr>
-            </table>
-            <button onClick={Ingreso} className='boton loginBoton'>Ingresar</button>
-            <button onClick={Registro} className='boton loginBoton'>Registrarse</button>
-            
+            <div class="contenedor contenidos-log">
+                    <label htmlFor="email">Usuario:</label>
+                    <input type='email' id='email' onChange={(e) => setEmail(e.target.value)}/>
+                    <label htmlFor='password'>Contraseña:</label>
+                    <input type='password' id='password'  onChange={(e) => setPassword(e.target.value)}/>
+                    <button onClick={Ingreso} className='boton loginBoton'>Ingresar</button>
+                    <button onClick={Registro} className='boton loginBoton'>Registrarse</button>
+            </div>
+            <h4>¿Olvidó su contraseña?  </h4><button type='text' onClick={Reestablecer}>Reestablecer aquí.</button>
         </center>
+
     </div>
 )
+
+
 }

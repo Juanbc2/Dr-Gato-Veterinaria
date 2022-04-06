@@ -13,11 +13,9 @@ const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-      <Suspense fallback={'Cargando gatitos con estetoscopio..'}>
         <Router>
         <App/>          
         </Router>
-      </Suspense>
     </FirebaseAppProvider>
   </React.StrictMode>,
 );

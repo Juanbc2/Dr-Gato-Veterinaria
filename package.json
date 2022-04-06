@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/testing": "^0.20.11",
     "@ionic/react": "^5.9.3",
     "@ionic/react-router": "^5.9.3",
     "@testing-library/jest-dom": "^5.16.3",
@@ -19,6 +20,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "reactfire": "^4.2.1",
+    "sweetalert": "^2.1.2",
     "tslib": "^2.3.1",
     "web-vitals": "^2.1.4"
   },
