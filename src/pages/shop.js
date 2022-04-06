@@ -1,16 +1,23 @@
 import '../css/stylesheet.css';
-import {useFirebaseApp} from 'reactfire';
-import Auth from '../services/auth';
-import topImage from '../resources/images/topImage.png';
-import '../css/stylesheet.css';
+import Productos from './product';
 import React from 'react';
 
 class Shop extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+        }
+    }
 render(){
-    return(<div>
-        <h1>Bienvenido a la tienda</h1>
-    </div>);
+    return(
+    <main>
+        <Productos/>
+    </main>
+    );
 }
 }
+
+
+
 
 export default Shop;

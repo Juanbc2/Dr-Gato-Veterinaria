@@ -1,4 +1,4 @@
-export default  {
+export default{
   apiKey: "AIzaSyAV6-VQtzvQiwH6khvJPnl9FH76HLCWZlg",
   authDomain: "dr-gato-veterinaria.firebaseapp.com",
   projectId: "dr-gato-veterinaria",

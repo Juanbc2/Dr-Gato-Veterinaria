@@ -4,9 +4,13 @@
     --primario:#23B5D3;
     --secundario:#F7D352;
     --terciario:#29335C;
+    --gris-oscuro:#9aa1a8;
     --gris-claro:#dfe9f3;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap');
+
+/**gerenarl**/
 html{
     font-size: 62.5%;
     box-sizing: border-box;
@@ -15,29 +19,18 @@ html{
     box-sizing: inherit;
 }
 
-body{
+.body{
     font-family: 'Krub', sans-serif;
     font-size: 16px;
     background-color: var(--gris-claro);
 }
 
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap');
-
-
-.contenedor{
-    max-width: 100rem;
-    margin:0 auto;
-}
-
 .boton{
-    background-color: var(--secundario);
-    color: var(--blanco);
+    background-color: var(--gris-claro);
+    color: var(--negro);
     padding:1rem 3rem;
-    margin-top: 1rem;
-    font-size: 2rem;
+    margin: 0.5em;
+    font-size: 1.5rem;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
@@ -46,6 +39,17 @@ body{
     text-align: center;
     border:none;
 }
+
+.boton:hover{
+    background-color: var(--secundario);
+}
+
+.contenedor{
+    max-width: 100rem;
+    margin:0 auto;
+}
+
+
 @media (min-width: 768px){ 
     .boton{
         width:auto;
@@ -118,13 +122,17 @@ header h1{
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
+    align-items: center;
 }
 @media (min-width: 768px){         
     .navegacion-principal{
         flex-direction: row;
         justify-content: space-between;
+
     }
 }
+
+
 
 .navegacion-principal a{
     padding: 1rem;
@@ -139,6 +147,11 @@ header h1{
 .navegacion-principal a:hover{
     background-color: var(--secundario);
     color: var(--negro);
+}
+
+.navegacion-principal .boton{
+    padding: 1rem 2rem;
+
 }
 
 /**Servicios**/
@@ -186,3 +199,137 @@ footer h2{
     color: var(--blanco);    
     padding: 1.5rem;
 }
+
+/**Productos**/
+.producto {
+  background-color:var(--blanco);
+  width: 13.8em;
+  text-align: center;
+  padding: 1em;
+  margin: 5px;
+
+}
+
+.producto > h2{
+  font-size: 1em;
+  min-height: 3em;
+  color: var(--negro);
+}
+.producto > h3{
+    font-size: 0.8em;
+    color: var(--negro);
+}
+
+.imageFrame > img {
+  max-width: 10em;
+  max-height: 10em;
+  border-radius: 10%;
+
+}
+
+.imageFrame {
+    min-height: 10em;
+    min-width: 10em;
+    justify-content: center;
+    display: flex;
+}
+
+.producto > button:hover{
+  background-color: var(--secundario);
+}
+
+.shop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:flex-start;
+}
+
+
+/**Nosotros**/
+
+.nosotros{
+    display:grid;
+    gap:1rem;
+}
+
+@media (min-width: 768px){ 
+    .nosotros{
+        display:grid;
+        grid-template-columns:repeat(6,1fr);
+        grid-template-rows:1;
+        column-gap: 1rem;
+    }
+
+    .nosotros .nosotros-main{
+        grid-column: 1/6;
+    }
+    
+    .nosotros .contacto{
+        grid-column: 6/7;
+    }
+}
+
+.nosotros img{
+    height: 30rem;
+    display: block;    
+    background-size: cover; 
+}
+
+.nosotros .contacto p{
+    background-color: var(--secundario);
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 60% 0 60% 0;
+}
+
+.nosotros.contacto a{
+    color: black;
+    text-decoration: none;
+}
+.logos{
+    font-size: 1.5em;
+    color: var(--primario);
+    vertical-align: bottom;
+}
+
+.bigLogo{
+    font-size: 10em;
+    background-color: var(--primario);
+    border-radius: 100%;
+    color: var(--gris-claro);
+    padding: 2% 2%;
+}
+
+/**Logo**/
+#logo {
+    background: url("../resources/images/topImageAux.png") no-repeat;
+}
+
+#logo:hover{
+    background: url("../resources/images/topImage.png") no-repeat;
+}
+
+/**Consultory**/
+
+.form{
+   grid-column: 1/3;
+}
+
+.citas{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.citas aside{
+    margin-left:1rem;
+    grid-column: 3/4;
+    background-size: cover;
+}
+
+
+
+
+ 
+
