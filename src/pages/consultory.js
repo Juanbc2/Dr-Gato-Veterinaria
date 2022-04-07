@@ -6,7 +6,7 @@ render(){
     return(
     <main>
         <h2>Agendar Citas</h2>
-        <div class="contenedor citas">
+        <div className="contenedor citas">
             <div align="center" className="sombra citas-form">
                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSenvb6M4SGSpzKpskkaCevwiAxagK4RfAMKQmEzKUbr8wzZ9w/viewform?embedded=true" width="75%" height="462" frameBorder="0" marginHeight="0" marginWidth="0">Cargando…</iframe>
 

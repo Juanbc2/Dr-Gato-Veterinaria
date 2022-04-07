@@ -1,65 +1,46 @@
 import '../css/stylesheet.css';
 import Productos from './product';
 import React from 'react';
-import Carrito from "./carrito";
-import useState from 'react';
-
+import Carrito from './carrito';
+import Modal from 'react-responsive-modal';
 
 class Shop extends React.Component{
-    
-
     constructor(props){
         super(props);
         this.state = {
-            cartItems:[] ,
-            item: {},
-            
-
+            showModal: false,
+            open: false,
+            key: '',
         }
-
-        this.onAdd = this.onAdd.bind(this);
-        
-    } 
-
-    
-
-    onAdd = (product) =>{                
-        const exist = this.cartItems.find((x)=> x.name === product.name);
-
-        const setCartItems = useState([]);
-        
-        if(exist){
-            setCartItems(this.state.cartItems.map((x)=> x.name === product.name ? {...exist, qyt: exist.qty+1}:x));
-        }
-        else{
-            setCartItems([...this.state.cartItems, {...product, qty: 1}]);
-        }        
+        this.openModal = this.openModal.bind(this);
+        this.onOpenModal = this.onOpenModal.bind(this);
+        this.onCloseModal = this.onCloseModal.bind(this);
     }
 
-render(){
-    return(
-    <main class="shop contenedor">        
-        <Productos/>
-        <aside className='shop-cart sombra'>
-            <h2>Cart items</h2>
-            
-            <div>{this.state.cartItems.length === 0 && <div>Cart is Empty</div>}</div>{
-                this.state.cartItems.map((item)=>(
-                    <div key={this.state.item.id} className="row">
-                        <div>
-                            <button onClick={this.onAdd(item)} className="add">+</button>
-                            <button onRemove={this.onAdd(item)} className="remove">-</button>
-                        </div>
-                        <div>
-                            {item.qty} x ${item.price.toFixed(2)}
 
-                        </div>
-                    </div>                     
-                ))
-            }
-        </aside>
-        <Carrito ></Carrito >
-        
+    openModal = () => {
+        this.setState({
+          showModal: true
+        });
+      }
+
+      onOpenModal = ()  => {
+            this.setState({ open: true });
+      };
+     
+      onCloseModal = () => {
+        this.setState({ open: false ,showModal: false});
+      };
+
+render(){    
+    
+    return(
+    <main className="shop contenedor">     
+            <button class="term-compra boton sombra" onClick={this.onOpenModal}>Terminar compra</button>   
+        <Productos/>
+        <Modal open={this.state.open} onClose={this.onCloseModal} center>
+        <Carrito key={this.state.requirementKey}/>
+      </Modal>
     </main>
     );
 }

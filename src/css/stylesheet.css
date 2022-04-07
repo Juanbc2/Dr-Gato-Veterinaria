@@ -28,7 +28,6 @@ html{
 .boton{
     background-color: var(--gris-claro);
     color: var(--negro);
-    padding:1rem 3rem;
     margin: 0.5em;
     font-size: 1.5rem;
     text-decoration: none;
@@ -65,6 +64,25 @@ html{
     background-color: var(--blanco);
     padding: 2rem;
     border-radius: 1rem;
+}
+
+.sombraCarrito{
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.45);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.45);
+    background-color: var(--blanco);
+    
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 1rem;
+    font-size: 2rem;
+}
+
+.remove{
+    background-color: #e77575;
+}
+
+.add{
+    background-color: #75e775;
 }
 
 /*Tipografia*/
@@ -108,9 +126,8 @@ header{
 }
 
 .mainShop{
-    display: flex;
     margin-right:10em;
-    min-width: auto;
+    display: inline-block;
 }
 
 header a img{
@@ -162,7 +179,6 @@ header h1{
 
 .navegacion-principal .boton{
     padding: 1rem 2rem;
-
 }
 
 /**Servicios**/
@@ -199,6 +215,8 @@ header h1{
     align-items: center;
 }
 
+
+
 /**Footer**/
 
 footer{
@@ -219,7 +237,6 @@ footer h2{
   text-align: center;
   padding: 1em;
   margin: 5px;
-
 }
 
 .producto > h2{
@@ -230,6 +247,15 @@ footer h2{
 .producto > h3{
     font-size: 0.8em;
     color: var(--negro);
+}
+
+.producto > button:hover{
+    background-color: var(--secundario);
+}
+
+.producto > button:active{
+    color: var(--blanco);
+    background-color: var(--terciario);
 }
 
 .imageFrame > img {
@@ -246,22 +272,87 @@ footer h2{
     display: flex;
 }
 
-.producto > button:hover{
-  background-color: var(--secundario);
+.contenidos-log{
+    display: grid;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius:1rem;
 }
 
-.contenidos-log{
+.contenidos-log input{
+    width:100%;
+    padding: 1.5rem;
+    border-radius:.5rem;
+}
+
+.contenidos-log label{
+    color: var(--negro);
+    font-size:1.5rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
     display: block;
 }
 
-/**
+.contenidos-log button{
+    background-color: var(--terciario);
+    color:var(--blanco);
+}
+.contenidos-log button:hover{
+    color: var(--negro);
+}
+
+.contenidos-log h4{
+    font-size: 1.2rem;
+
+}
+
 .shop {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content:center;
 }
-**/
+
+
+@media (min-width: 768px){ 
+    .shop{
+        grid-template-columns: repeat(5,1fr);
+    }
+    .term-compra{
+        grid-column: 5/6;
+    }
+
+}
+.term-compra{
+    max-height: 9rem;
+
+}
+
+.nombres-carrito{
+    font-size:1.5rem;
+    /*min-width: 15rem;*/
+    margin-bottom:2rem;
+    width: 20rem;
+}
+
+.botones-carrito{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    height: 6.5rem;
+    gap:3rem;
+}
+
+.boton-carrito{
+    max-width: min-content;
+    margin-bottom: 3rem;
+}
+@media (min-width: 768px){ 
+    .boton-carrito{
+        max-width: none;
+    }
+}
+
 
 /**Nosotros**/
 
@@ -343,4 +434,12 @@ footer h2{
     .citas-info{
         grid-column: 3/4;
     }
+}
+
+#logo {
+    background-image: url('../');
+}
+
+#logo:hover {
+    
 }
