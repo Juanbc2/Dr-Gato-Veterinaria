@@ -14,7 +14,7 @@ export default function App(props) {
   const [productos, setProductos] = useState([{ name: "Loading...", id: "initial" }]);
 
   function onAdd(item){
-    var cartItems = cartData.productos;
+    let cartItems = cartData.productos;
   const exist = buscarInArray(cartItems,item.id);
     //const exist = cartItems.includes(itemAux);
     if(exist){
