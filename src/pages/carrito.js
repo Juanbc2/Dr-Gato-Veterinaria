@@ -16,7 +16,7 @@ export default function App() {
   const [test, setTest] = useState("adsadas");
 
   function onAdd(item, int) {
-    var cartItems = cartData.productos;
+    let cartItems = cartData.productos;
     //const exist = buscarInArray(cartItems,item.id);
     if (item.qty > 0) {
       for (let i = 0; i < cartItems.length; i++) {
@@ -48,10 +48,10 @@ export default function App() {
   }
 
   const handleNew = async () => {
-    var user = auth.currentUser;
+    let user = auth.currentUser;
     if (user) {
       const collectionRef = collection(db, "pedidos");
-      var json = JSON.stringify(cartItems);
+      let json = JSON.stringify(cartItems);
       const payload = { UID: user.uid, json: json };
       await addDoc(collectionRef, payload);
       SweetAlert({
@@ -83,14 +83,14 @@ export default function App() {
             </div>{" "}
             <button 
               onClick={() => {
-                var a = onAdd(item, -1);
+                let a = onAdd(item, -1);
                 setCartItems(a);
               }}
               className="sombraCarrito remove"
             >-</button>
             <button 
               onClick={() => {
-                var a = onAdd(item, 1);
+                let a = onAdd(item, 1);
                 setCartItems(a);
               }}
               className="sombraCarrito add"
